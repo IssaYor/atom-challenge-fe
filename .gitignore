@@ -1,0 +1,19 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build
+dist/
+coverage/
+
+# Angular cache
+.angular/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+.DS_Store

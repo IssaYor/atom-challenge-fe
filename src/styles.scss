@@ -1,0 +1,22 @@
+@import "assets/styles/theme";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif; }
+
+
+.cdk-overlay-container,
+.cdk-overlay-pane,
+.mat-mdc-dialog-container {
+  background: transparent !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background: #1c2333 !important;
+  color: white !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.cdk-overlay-backdrop {
+  background: rgba(0, 0, 0, 0.7) !important;
+}

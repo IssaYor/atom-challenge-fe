@@ -1,0 +1,55 @@
+<div class="page">
+  <header class="page__header">
+    <div class="page__header-left">
+      <h1 class="app-title">Atom Tasks</h1>
+      <p class="app-subtitle">
+        Gestiona tus tareas pendientes y marca lo que vayas completando.
+      </p>
+    </div>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      class="logout-btn"
+      (click)="backToLogin()"
+    >
+      Volver al inicio de sesión
+    </button>
+  </header>
+
+  <main class="page__content">
+    <section class="card card--form">
+      <app-task-form
+        [editingTask]="editingTask"
+        [saving]="saving"
+        [errorMessage]="errorMessage"
+        (submitTask)="onSubmitTask($event)"
+        [resetSignal]="resetCounter"
+        (cancelEdit)="onCancelEdit()"
+      ></app-task-form>
+    </section>
+
+    <section class="card card--list">
+        <div class="card__header-row">
+          <h2 class="card__title">Tus tareas</h2>
+      
+          <span class="chip" *ngIf="!loading">
+            {{ pendingCount }} pendientes · {{ completedCount }} completadas
+          </span>
+        </div>
+      
+        <div class="card__body">
+          <app-task-list
+            [tasks]="tasks"
+            [loading]="loading"
+            [pendingCount]="pendingCount"
+            [completedCount]="completedCount"
+            (toggle)="onToggleCompleted($event)"
+            (edit)="onEdit($event)"
+            (delete)="onDelete($event)"
+          ></app-task-list>
+        </div>
+      </section>
+      
+  </main>
+</div>

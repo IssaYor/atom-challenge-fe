@@ -1,0 +1,120 @@
+<div class="task-form">
+    <h2 class="task-form__title" id="task-form-title">
+      {{ editingTask ? 'Editar tarea' : 'Nueva tarea' }}
+    </h2>
+  
+    <p class="task-form__subtitle" id="task-form-subtitle">
+      {{
+        editingTask
+          ? 'Actualiza el título o la descripción de la tarea seleccionada.'
+          : 'Agrega una nueva tarea a tu lista.'
+      }}
+    </p>
+  
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+      class="form"
+      role="form"
+      aria-labelledby="task-form-title task-form-subtitle"
+      novalidate
+    >
+      <div class="form-field">
+        <label for="title">
+          Título *
+        </label>
+  
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          [class.is-invalid]="title.invalid && (title.dirty || title.touched)"
+          placeholder="Escribe el título de tu tarea"
+          aria-required="true"
+          [attr.aria-invalid]="title.invalid && (title.dirty || title.touched) ? 'true' : 'false'"
+          [attr.aria-describedby]="
+            title.invalid && (title.dirty || title.touched)
+              ? 'title-error'
+              : 'title-help'
+          "
+        />
+  
+        <small
+          id="title-help"
+          class="field-hint"
+          *ngIf="!(title.errors && (title.dirty || title.touched))"
+        >
+          El título debe describir claramente la tarea.
+        </small>
+  
+        <small
+          id="title-error"
+          class="field-error"
+          *ngIf="title.errors && (title.dirty || title.touched)"
+          role="alert"
+          aria-live="polite"
+        >
+          <span *ngIf="title.errors['required']">
+            El título es obligatorio.
+          </span>
+          <span *ngIf="title.errors['maxlength']">
+            Máximo {{ title.errors['maxlength'].requiredLength }} caracteres.
+          </span>
+        </small>
+      </div>
+  
+      <div class="form-field">
+        <label for="description">
+          Descripción
+        </label>
+  
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="3"
+          placeholder="Describe brevemente la tarea (opcional)"
+          [attr.aria-describedby]="'description-help'"
+        ></textarea>
+  
+        <small id="description-help" class="field-hint">
+          Puedes añadir detalles adicionales sobre la tarea (opcional).
+        </small>
+      </div>
+  
+      <div class="form-actions">
+        <button
+          *ngIf="editingTask"
+          mat-stroked-button
+          color="primary"
+          type="button"
+          (click)="onCancelEdit()"
+        >
+          Cancelar edición
+        </button>
+  
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="saving"
+          [attr.aria-busy]="saving ? 'true' : 'false'"
+        >
+          {{ editingTask ? 'Guardar cambios' : 'Agregar tarea' }}
+        </button>
+      </div>
+  
+      <p class="form-hint">
+        Las tareas nuevas se agregan primero en la lista.
+      </p>
+  
+      <p
+        class="form-error"
+        *ngIf="errorMessage"
+        role="alert"
+        aria-live="assertive"
+      >
+        {{ errorMessage }}
+      </p>
+    </form>
+  </div>
+  

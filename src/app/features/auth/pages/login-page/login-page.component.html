@@ -1,0 +1,70 @@
+<div class="auth-container" role="main">
+    <div class="auth-card" role="region" aria-label="Formulario de inicio de sesión">
+      <h1 tabindex="0">Atom Tasks</h1>
+  
+      <p class="subtitle" tabindex="0">
+        Inicia sesión con tu correo para gestionar tus tareas.
+      </p>
+  
+      <form
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        role="form"
+        aria-labelledby="login-title"
+        novalidate
+      >
+        <label for="email">Correo electrónico</label>
+  
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="tu@correo.com"
+          [class.invalid]="email.invalid && (email.dirty || email.touched)"
+          autocomplete="email"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="email.invalid ? 'true' : 'false'"
+          [attr.aria-describedby]="email.invalid ? 'email-error' : null"
+        />
+  
+        <div
+          id="email-error"
+          class="error"
+          *ngIf="email.errors && (email.dirty || email.touched)"
+          aria-live="polite"
+        >
+          <span *ngIf="email.errors['required']">
+            El correo es obligatorio.
+          </span>
+          <span *ngIf="email.errors['email']">
+            Formato de correo inválido.
+          </span>
+        </div>
+  
+        <button
+          type="submit"
+          [disabled]="loading"
+          class="login-btn"
+          mat-flat-button
+          color="primary"
+          [attr.aria-label]="loading ? 'Ingresando, espere' : 'Ingresar'"
+        >
+          {{ loading ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+  
+        <p class="hint" tabindex="0">
+          Si el usuario no existe, se te preguntará si deseas crearlo.
+        </p>
+  
+        <div
+          class="error global"
+          *ngIf="errorMessage"
+          aria-live="assertive"
+        >
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,95 @@
+$card-border: rgba(148, 163, 184, 0.2);
+$text-main: #e5e7eb;
+$text-muted: #9ca3af;
+$primary: #6366f1;
+$danger: #f97373;
+
+:host {
+  display: block;
+}
+
+.task-form {
+  border-radius: 1.25rem;
+  border: 1px solid $card-border;
+  padding: 1.75rem 1.5rem;
+  background: #020617;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+}
+
+.task-form__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.task-form__subtitle {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: $text-muted;
+}
+
+.form {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: $text-muted;
+  }
+
+  input,
+  textarea {
+    background: #020617;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+    color: $text-main;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
+    }
+
+    &.is-invalid {
+      border-color: $danger;
+    }
+  }
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: $danger;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.form-hint {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: $text-muted;
+}
+
+.form-error {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: $danger;
+}
