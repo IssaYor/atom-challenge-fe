@@ -16,10 +16,22 @@ $primary-soft: rgba(99, 102, 241, 0.16);
     #000 100%
   );
   color: $text-main;
-  padding: 2rem 1.5rem;
+
+  padding-top: calc(1.5rem + env(safe-area-inset-top));
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
 
   @media (min-width: 1024px) {
-    padding: 3rem 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
@@ -30,6 +42,7 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   flex-direction: column;
   gap: 2rem;
 }
+
 
 .page__header {
   display: flex;
@@ -51,20 +64,32 @@ $primary-soft: rgba(99, 102, 241, 0.16);
 }
 
 .app-title {
-  font-size: 1.75rem;
+  font-size: clamp(1.6rem, 4vw, 1.9rem);
   font-weight: 700;
 }
 
 .app-subtitle {
   color: $text-muted;
   font-size: 0.95rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 }
 
 .logout-btn {
   border-radius: 999px;
   border-color: $primary-soft !important;
   color: $text-main !important;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.25rem;
+  }
 }
+
 
 .page__content {
   display: grid;
@@ -77,11 +102,12 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   }
 }
 
+
 .card {
   background: $card-bg;
   border-radius: 1.25rem;
   border: 1px solid $card-border;
-  padding: 1.75rem 1.5rem;
+  padding: 1.5rem 1.25rem;
   box-shadow:
     0 22px 45px rgba(15, 23, 42, 0.7),
     0 0 0 1px rgba(15, 23, 42, 0.6);
@@ -94,6 +120,10 @@ $primary-soft: rgba(99, 102, 241, 0.16);
 .card__title {
   font-size: 1.2rem;
   font-weight: 600;
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
 }
 
 .card__header-row {
@@ -101,6 +131,10 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 480px) {
+    align-items: flex-start;
+  }
 }
 
 .chip {
@@ -110,6 +144,11 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   color: $primary;
   font-size: 0.8rem;
   font-weight: 500;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
 }
 
 .card__body {
