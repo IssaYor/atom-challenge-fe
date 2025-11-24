@@ -1,3 +1,4 @@
+
 $page-bg: #020617;
 $card-bg: #020617;
 $card-border: rgba(148, 163, 184, 0.2);
@@ -49,7 +50,6 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   }
 }
 
-
 .page__header {
   display: flex;
   flex-direction: column;
@@ -96,7 +96,6 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   }
 }
 
-
 .page__content {
   display: grid;
   grid-template-columns: 1fr;
@@ -115,7 +114,6 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   }
 }
 
-
 .card {
   background: $card-bg;
   border-radius: 1.25rem;
@@ -125,9 +123,10 @@ $primary-soft: rgba(99, 102, 241, 0.16);
     0 22px 45px rgba(15, 23, 42, 0.7),
     0 0 0 1px rgba(15, 23, 42, 0.6);
   width: 100%;
-  box-sizing: border-box;
   max-width: 600px;
   margin-inline: auto;
+  box-sizing: border-box;
+
   @media (min-width: 768px) {
     padding: 2rem;
   }
