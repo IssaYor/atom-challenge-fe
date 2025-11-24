@@ -53,13 +53,12 @@ describe('TaskListPageComponent', () => {
     component = fixture.componentInstance;
   });
 
-  // ---------- ngOnInit / loadTasks ----------
 
   it('should load tasks on init (success)', () => {
     const tasks = [buildTask('1'), buildTask('2', true)];
     taskServiceSpy.getTasks.and.returnValue(of(tasks));
 
-    fixture.detectChanges(); // dispara ngOnInit
+    fixture.detectChanges();
 
     expect(taskServiceSpy.getTasks).toHaveBeenCalled();
     expect(component.loading).toBeFalse();
@@ -71,7 +70,7 @@ describe('TaskListPageComponent', () => {
       throwError(() => new Error('load error')),
     );
 
-    fixture.detectChanges(); // dispara ngOnInit
+    fixture.detectChanges();
 
     expect(taskServiceSpy.getTasks).toHaveBeenCalled();
     expect(component.loading).toBeFalse();
@@ -79,8 +78,6 @@ describe('TaskListPageComponent', () => {
       'Ocurrió un error al cargar tus tareas. Inténtalo de nuevo más tarde.',
     );
   });
-
-  // ---------- onSubmitTask (create) ----------
 
   it('should create a new task when not editing', () => {
     const existing = [buildTask('1')];
@@ -98,7 +95,6 @@ describe('TaskListPageComponent', () => {
     component.onSubmitTask(payload);
 
     expect(taskServiceSpy.createTask).toHaveBeenCalledWith(payload);
-    // creada primero en la lista
     expect(component.tasks[0]).toEqual(created);
     expect(component.tasks.length).toBe(2);
     expect(component.saving).toBeFalse();
@@ -126,8 +122,6 @@ describe('TaskListPageComponent', () => {
     expect(component.errorMessage).toBe('Error al crear');
     expect(notificationSpy.error).toHaveBeenCalledWith('Error al crear');
   });
-
-  // ---------- onSubmitTask (update) ----------
 
   it('should update task when editingTask is set', () => {
     const original = buildTask('1', false);
@@ -181,8 +175,6 @@ describe('TaskListPageComponent', () => {
     expect(notificationSpy.error).toHaveBeenCalledWith('Error al actualizar');
   });
 
-  // ---------- onToggleCompleted ----------
-
   it('should toggle completed state of a task', () => {
     const task = buildTask('1', false);
     component.tasks = [task];
@@ -212,8 +204,6 @@ describe('TaskListPageComponent', () => {
     );
   });
 
-  // ---------- onEdit / onCancelEdit / onFormSubmitted ----------
-
   it('should set editingTask when onEdit is called', () => {
     const task = buildTask('1');
     component.onEdit(task);
@@ -234,8 +224,6 @@ describe('TaskListPageComponent', () => {
     component.onFormSubmitted();
     expect(component.editingTask).toBeNull();
   });
-
-  // ---------- onDelete ----------
 
   it('should delete a task when onDelete succeeds', () => {
     const task1 = buildTask('1');
@@ -270,16 +258,12 @@ describe('TaskListPageComponent', () => {
     expect(notificationSpy.error).toHaveBeenCalledWith('Error al eliminar');
   });
 
-  // ---------- backToLogin ----------
-
   it('should logout and navigate back to login', () => {
     component.backToLogin();
 
     expect(authServiceSpy.logout).toHaveBeenCalled();
     expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/login');
   });
-
-  // ---------- counters ----------
 
   it('should calculate pendingCount and completedCount correctly', () => {
     component.tasks = [

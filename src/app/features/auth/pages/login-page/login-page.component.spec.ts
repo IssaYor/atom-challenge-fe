@@ -82,7 +82,6 @@ describe('LoginPageComponent', () => {
       throwError(() => ({ status: 404 }))
     );
 
-    // el diálogo devolverá "false" (usuario cancela)
     dialogMock.open.and.returnValue({
       afterClosed: () => of(false),
     } as any);
@@ -106,7 +105,6 @@ describe('LoginPageComponent', () => {
       throwError(() => ({ status: 404 }))
     );
 
-    // ahora el usuario confirma crear la cuenta
     dialogMock.open.and.returnValue({
       afterClosed: () => of(true),
     } as any);
@@ -141,7 +139,6 @@ describe('LoginPageComponent', () => {
     expect(component.errorMessage).toBe(
       'Error inesperado. Intenta nuevamente.'
     );
-    // opcional: también podrías comprobar que NO abre el diálogo:
     expect(dialogMock.open).not.toHaveBeenCalled();
   });
 });
