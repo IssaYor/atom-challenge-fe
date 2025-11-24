@@ -21,6 +21,7 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+  overflow-x: hidden;
 
   @media (min-width: 768px) {
     padding-left: 2.5rem;
@@ -36,11 +37,16 @@ $primary-soft: rgba(99, 102, 241, 0.16);
 }
 
 .page {
+  width: 100%;
   max-width: 1120px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 899px) {
+    align-items: center;
+  }
 }
 
 
@@ -95,6 +101,12 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  width: 100%;
+
+  @media (max-width: 899px) {
+    max-width: 520px;
+    margin-inline: auto;
+  }
 
   @media (min-width: 900px) {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
@@ -111,6 +123,8 @@ $primary-soft: rgba(99, 102, 241, 0.16);
   box-shadow:
     0 22px 45px rgba(15, 23, 42, 0.7),
     0 0 0 1px rgba(15, 23, 42, 0.6);
+  width: 100%;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
     padding: 2rem;
