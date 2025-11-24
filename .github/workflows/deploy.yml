@@ -23,7 +23,7 @@ jobs:
       - name: Run unit tests
         env:
           CI: true
-        run: npm run test
+        run: npm run test:ci
 
       - name: Build Angular app
         run: npm run build
