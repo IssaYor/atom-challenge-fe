@@ -1,36 +1,140 @@
-# ATOM FE CHALLENGE TEMPLATE - ANGULAR
+## ATOM TASKS — Frontend (Angular 17 Standalone)
 
-Este proyecto es una plantilla con lo necesario para comenzar a desarrollar el front-end de la aplicación de la prueba técnica de Atom. Se base en Angular con la versión 17.3.6.
-Se ha realizado la instalación y configuración de varias dependencias necesarias para el desarrollo de la aplicación, como por ejemplo: Angular Material.
+    Administrador de tareas moderno, accesible y totalmente responsive.
 
-## Instrucciones
-Siéntete libre de clonar este repositorio y utilizarlo como base para el desarrollo de la aplicación. Sigue las indicates de la prueba técnica para completar la aplicación y desarrolla como más te sientas cómodo.
+    Este proyecto corresponde al frontend del desafío Atom Challenge, desarrollado con Angular 17, Material Design, arquitectura modular, pruebas unitarias completas y despliegue automático en Firebase Hosting mediante GitHub Actions.
 
-De igual manera puedes documentar dentro de este archivo todo lo que deseas contar sobre tu desarrollo, como por ejemplo, decisiones de diseño, problemas encontrados, etc.
+## Tecnologías principales
 
-## Comentarios sobre el desarrollo
-...
+    Angular 17 (Standalone)
+    TypeScript
+    RxJS
+    Angular Material
+    SCSS modular
+    Karma + Jasmine (Unit tests)
+    Firebase Hosting
+    GitHub Actions (CI/CD)
+    JWT + Interceptors
 
-## Development server
+## Estructura de carpetas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+    src/
+    ├── app/
+    │   ├── core/
+    │   │   ├── interceptors/
+    │   │   ├── models/
+    │   │   ├── services/
+    │   │   └── guards/
+    │   │
+    │   ├── shared/
+    │   │   ├── components/
+    │   │   ├── services/
+    │   │   └── directives/
+    │   │
+    │   ├── features/
+    │   │   ├── auth/
+    │   │   └── tasks/
+    │   │       ├── pages/
+    │   │       └── components/
+    │   │
+    │   ├── app.routes.ts
+    │   └── app.config.ts
+    │
+    ├── assets/
+    │   ├── images/
+    │   └── styles/
+    │
+    ├── environments/
+    └── main.ts
 
-## Code scaffolding
+## Funcionalidades implementadas
+    # Autenticación moderna
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    Login basado en email.
 
-## Build
+    Manejo automático de usuario no encontrado (abre modal para crear cuenta).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    Persistencia de sesión.
 
-## Running unit tests
+    Logout seguro.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    Interceptor global para enviar token JWT.
 
-## Running end-to-end tests
+    # Gestión completa de tareas
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ✔ Listar tareas
+    ✔ Crear tareas
+    ✔ Editar
+    ✔ Eliminar
+    ✔ Marcar como completadas
+    ✔ Contadores de estados
+    ✔ Reinicio automático del formulario
+    ✔ Notificaciones globales (snackbar)
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Componentes desarrollados
+   # LoginPageComponent
+        Pantalla de autenticación con formulario reactivo, estilos modernos y accesibilidad.
+
+   # TaskListPageComponent
+
+    Página principal del sistema:
+
+        Integra formulario + listado
+        Controla el estado (loading, saving, editing)
+        Consume TaskService
+        Maneja eventos internos
+
+   # TaskFormComponent
+
+        Crear y editar tareas
+        Validaciones en tiempo real
+        Reset automático mediante signal
+
+   # TaskListComponent
+
+        Renderizado dinámico
+        Tooltips inteligentes
+        Truncamiento de texto
+        Botón "Ver más" con tooltip al hacer click
+        Diseño responsive
+
+## Pruebas unitarias
+   # Cubrimiento:
+        Servicios
+        AuthService
+        TaskService
+
+   # Componentes:
+        LoginPageComponent
+        TaskListComponent
+        TaskFormComponent
+        TaskListPageComponent
+
+   # Se probaron:
+        Estados de carga
+        Emisión de eventos
+        Validaciones
+        Llamadas HTTP mockeadas
+        Renderizado condicional
+        Interceptor de token
+
+   # Comando en CI:
+        npm run test:ci
+
+## Integración Continua (CI/CD) — GitHub Actions + Firebase Hosting
+
+  # El proyecto incluye un pipeline completo para:
+
+     Instalar dependencias
+     Ejecutar pruebas unitarias
+     Construir la app Angular
+     Desplegar automáticamente a Firebase Hosting
+     Cada vez que se hace push al branch main.
+
+## Secretos requeridos
+
+  # En GitHub debes configurar:
+
+    Variable: FIREBASE_TOKEN
+    Descripción: Token de servicio generado con firebase login:ci 

@@ -117,7 +117,6 @@ export class TaskListPageComponent implements OnInit {
     this.errorMessage = null;
   }
 
-
   onToggleCompleted(task: Task): void {
     this.taskService.toggleCompleted(task).subscribe({
       next: (updated) => {
@@ -165,5 +164,4 @@ export class TaskListPageComponent implements OnInit {
   onFormSubmitted() {
     this.editingTask = null;
   }
-  
 }

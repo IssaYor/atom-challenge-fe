@@ -1,27 +1,37 @@
 <div class="task-list-wrapper">
-  <div class="loading" *ngIf="loading" aria-live="polite">
+  <div
+    class="loading"
+    *ngIf="loading"
+    aria-live="polite"
+  >
     Cargando tareas...
   </div>
 
-  <div class="empty" *ngIf="!loading && tasks.length === 0" aria-live="polite">
+  <div
+    class="empty"
+    *ngIf="!loading && tasks.length === 0"
+    aria-live="polite"
+  >
     <p>No tienes tareas aún.</p>
-    <small class="empty__hint"> Comienza creando una tarea. </small>
+    <small class="empty__hint">
+      Comienza creando una tarea.
+    </small>
   </div>
 
-  <ul
+  <cdk-virtual-scroll-viewport
     *ngIf="!loading && tasks.length > 0"
-    class="task-list"
+    class="task-viewport"
+    itemSize="88"
     role="list"
     aria-label="Tareas actuales"
   >
-    <li
-      *ngFor="let task of tasks"
+    <div
+      *cdkVirtualFor="let task of tasks; trackBy: trackByTaskId"
       class="task-item"
       [class.task-item--completed]="task.completed"
       role="listitem"
       [attr.aria-label]="
-        (task.completed ? 'Tarea completada: ' : 'Tarea pendiente: ') +
-        task.title
+        (task.completed ? 'Tarea completada: ' : 'Tarea pendiente: ') + task.title
       "
     >
       <div class="task-item__main">
@@ -29,26 +39,21 @@
           [checked]="task.completed"
           (change)="onToggle(task)"
           [attr.aria-label]="
-            'Marcar como ' + (task.completed ? 'pendiente' : 'completada')
+            'Marcar como ' +
+            (task.completed ? 'pendiente' : 'completada')
           "
         ></mat-checkbox>
 
         <div class="task-item__content">
           <div class="task-item__header">
-            <h3 class="task-title">
-              {{ getTruncated(task.title, 25) }}
-
-              <ng-container *ngIf="task.title && task.title.length > 25">
-                <span
-                  class="view-more"
-                  [matTooltip]="task.title"
-                  matTooltipPosition="above"
-                  #titleTooltip="matTooltip"
-                  (click)="titleTooltip.toggle()"
-                >
-                  ver más
-                </span>
-              </ng-container>
+            <h3
+              class="task-title"
+              tabindex="0"
+              [matTooltip]="shouldShowTooltip(task.title, 10) ? task.title : null"
+              matTooltipPosition="above"
+              [matTooltipDisabled]="!shouldShowTooltip(task.title, 10)"
+            >
+              {{ getTruncated(task.title, 10) }}
             </h3>
 
             <span
@@ -57,24 +62,24 @@
               [class.status--done]="task.completed"
               role="status"
             >
-              {{ task.completed ? "Completada" : "Pendiente" }}
+              {{ task.completed ? 'Completada' : 'Pendiente' }}
             </span>
           </div>
 
-          <p *ngIf="task.description" class="task-item__description">
-            {{ getTruncated(task.description, 40) }}
+          <p
+            *ngIf="task.description"
+            class="task-item__description"
+            [matTooltip]="
+              shouldShowTooltip(task.description, 10) ? task.description : null
+            "
+            matTooltipPosition="above"
+            [matTooltipDisabled]="!shouldShowTooltip(task.description, 10)"
+          >
+            {{ getTruncated(task.description, 10) }}
+          </p>
 
-            <ng-container *ngIf="task.description.length > 40">
-              <span
-                class="view-more"
-                [matTooltip]="task.description"
-                matTooltipPosition="above"
-                #descTooltip="matTooltip"
-                (click)="descTooltip.toggle()"
-              >
-                ver más
-              </span>
-            </ng-container>
+          <p class="task-item__meta">
+            Creada el {{ task.createdAt | date: 'medium' }}
           </p>
         </div>
       </div>
@@ -98,6 +103,6 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
-    </li>
-  </ul>
+    </div>
+  </cdk-virtual-scroll-viewport>
 </div>
