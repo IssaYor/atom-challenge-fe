@@ -35,13 +35,20 @@
 
         <div class="task-item__content">
           <div class="task-item__header">
-            <h3
-              class="task-title"
-              tabindex="0"
-              [matTooltip]="shouldShowTooltip(task.title, 15) ? task.title : ''"
-              matTooltipPosition="above"
-            >
-              {{ getTruncated(task.title, 15) }}
+            <h3 class="task-title">
+              {{ getTruncated(task.title, 25) }}
+
+              <ng-container *ngIf="task.title && task.title.length > 25">
+                <span
+                  class="view-more"
+                  [matTooltip]="task.title"
+                  matTooltipPosition="above"
+                  #titleTooltip="matTooltip"
+                  (click)="titleTooltip.toggle()"
+                >
+                  ver más
+                </span>
+              </ng-container>
             </h3>
 
             <span
@@ -54,19 +61,20 @@
             </span>
           </div>
 
-          <p
-            *ngIf="task.description"
-            class="task-item__description"
-            [matTooltip]="
-              shouldShowTooltip(task.description, 15) ? task.description : ''
-            "
-            matTooltipPosition="above"
-          >
-            {{ getTruncated(task.description, 15) }}
-          </p>
+          <p *ngIf="task.description" class="task-item__description">
+            {{ getTruncated(task.description, 40) }}
 
-          <p class="task-item__meta">
-            Creada el {{ task.createdAt | date : "medium" }}
+            <ng-container *ngIf="task.description.length > 40">
+              <span
+                class="view-more"
+                [matTooltip]="task.description"
+                matTooltipPosition="above"
+                #descTooltip="matTooltip"
+                (click)="descTooltip.toggle()"
+              >
+                ver más
+              </span>
+            </ng-container>
           </p>
         </div>
       </div>

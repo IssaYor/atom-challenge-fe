@@ -136,3 +136,16 @@ $status-orange-soft: rgba(249, 115, 22, 0.12);
     justify-content: flex-end;
   }
 }
+
+.view-more {
+  color: #6366f1;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: 0.2s ease;
+
+  &:hover {
+    color: #818cf8;
+  }
+}
