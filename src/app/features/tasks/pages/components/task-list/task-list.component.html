@@ -1,97 +1,95 @@
 <div class="task-list-wrapper">
-    <div
-      class="loading"
-      *ngIf="loading"
-      aria-live="polite"
-    >
-      Cargando tareas...
-    </div>
-  
-    <div
-      class="empty"
-      *ngIf="!loading && tasks.length === 0"
-      aria-live="polite"
-    >
-      <p>No tienes tareas aún.</p>
-      <small class="empty__hint">
-        Comienza creando una tarea.
-      </small>
-    </div>
-  
-    <ul
-      *ngIf="!loading && tasks.length > 0"
-      class="task-list"
-      role="list"
-      aria-label="Tareas actuales"
-    >
-      <li
-        *ngFor="let task of tasks"
-        class="task-item"
-        [class.task-item--completed]="task.completed"
-        role="listitem"
-        [attr.aria-label]="
-          (task.completed ? 'Tarea completada: ' : 'Tarea pendiente: ') + task.title
-        "
-      >
-        <div class="task-item__main">
-          <mat-checkbox
-            [checked]="task.completed"
-            (change)="onToggle(task)"
-            [attr.aria-label]="
-              'Marcar como ' +
-              (task.completed ? 'pendiente' : 'completada')
-            "
-          ></mat-checkbox>
-  
-          <div class="task-item__content">
-            <div class="task-item__header">
-              <h3 class="task-title" tabindex="0">
-                {{ task.title }}
-              </h3>
-  
-              <span
-                class="status"
-                [class.status--pending]="!task.completed"
-                [class.status--done]="task.completed"
-                role="status"
-              >
-                {{ task.completed ? 'Completada' : 'Pendiente' }}
-              </span>
-            </div>
-  
-            <p
-              *ngIf="task.description"
-              class="task-item__description"
-            >
-              {{ task.description }}
-            </p>
-  
-            <p class="task-item__meta">
-              Creada el {{ task.createdAt | date : 'medium' }}
-            </p>
-          </div>
-        </div>
-  
-        <div class="task-item__actions">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onEdit(task)"
-            [attr.aria-label]="'Editar tarea ' + task.title"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-  
-          <button
-            mat-icon-button
-            color="warn"
-            (click)="onDelete(task)"
-            [attr.aria-label]="'Eliminar tarea ' + task.title"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </li>
-    </ul>
+  <div class="loading" *ngIf="loading" aria-live="polite">
+    Cargando tareas...
   </div>
-  
+
+  <div class="empty" *ngIf="!loading && tasks.length === 0" aria-live="polite">
+    <p>No tienes tareas aún.</p>
+    <small class="empty__hint"> Comienza creando una tarea. </small>
+  </div>
+
+  <ul
+    *ngIf="!loading && tasks.length > 0"
+    class="task-list"
+    role="list"
+    aria-label="Tareas actuales"
+  >
+    <li
+      *ngFor="let task of tasks"
+      class="task-item"
+      [class.task-item--completed]="task.completed"
+      role="listitem"
+      [attr.aria-label]="
+        (task.completed ? 'Tarea completada: ' : 'Tarea pendiente: ') +
+        task.title
+      "
+    >
+      <div class="task-item__main">
+        <mat-checkbox
+          [checked]="task.completed"
+          (change)="onToggle(task)"
+          [attr.aria-label]="
+            'Marcar como ' + (task.completed ? 'pendiente' : 'completada')
+          "
+        ></mat-checkbox>
+
+        <div class="task-item__content">
+          <div class="task-item__header">
+            <h3
+              class="task-title"
+              tabindex="0"
+              [matTooltip]="shouldShowTooltip(task.title, 15) ? task.title : ''"
+              matTooltipPosition="above"
+            >
+              {{ getTruncated(task.title, 15) }}
+            </h3>
+
+            <span
+              class="status"
+              [class.status--pending]="!task.completed"
+              [class.status--done]="task.completed"
+              role="status"
+            >
+              {{ task.completed ? "Completada" : "Pendiente" }}
+            </span>
+          </div>
+
+          <p
+            *ngIf="task.description"
+            class="task-item__description"
+            [matTooltip]="
+              shouldShowTooltip(task.description, 15) ? task.description : ''
+            "
+            matTooltipPosition="above"
+          >
+            {{ getTruncated(task.description, 15) }}
+          </p>
+
+          <p class="task-item__meta">
+            Creada el {{ task.createdAt | date : "medium" }}
+          </p>
+        </div>
+      </div>
+
+      <div class="task-item__actions">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onEdit(task)"
+          [attr.aria-label]="'Editar tarea ' + task.title"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="onDelete(task)"
+          [attr.aria-label]="'Eliminar tarea ' + task.title"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
