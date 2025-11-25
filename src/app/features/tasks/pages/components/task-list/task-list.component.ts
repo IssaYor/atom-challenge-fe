@@ -24,6 +24,7 @@ export class TaskListComponent {
   @Output() toggle = new EventEmitter<Task>();
   @Output() edit = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<Task>();
+  readonly viewportHeight = 420;
 
   onToggle(task: Task) {
     this.toggle.emit(task);

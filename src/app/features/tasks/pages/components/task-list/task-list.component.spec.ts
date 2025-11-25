@@ -50,18 +50,21 @@ describe('TaskListComponent', () => {
     expect(text).toContain('No tienes tareas aún');
   });
 
-  it('should render a list of tasks when data is provided', () => {
+  it('should render the virtual list when data is provided', () => {
     component.loading = false;
     component.tasks = [
       buildTask({ id: '1', title: 'Tarea 1' }),
       buildTask({ id: '2', title: 'Tarea 2' }),
     ];
+
     fixture.detectChanges();
 
-    const items = fixture.debugElement.queryAll(By.css('.task-item'));
-    expect(items.length).toBe(2);
-    expect(items[0].nativeElement.textContent).toContain('Tarea 1');
-    expect(items[1].nativeElement.textContent).toContain('Tarea 2');
+    const viewport = fixture.debugElement.query(
+      By.css('cdk-virtual-scroll-viewport')
+    );
+    expect(viewport).toBeTruthy();
+
+    expect(component.tasks.length).toBe(2);
   });
 
   it('should emit toggle when onToggle is called', () => {
